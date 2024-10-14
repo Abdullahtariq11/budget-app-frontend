@@ -1,0 +1,59 @@
+.nav-bar {
+    display: flex;
+    background-color: rgb(127, 127, 227);
+    padding: 10px;
+    align-items: center;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.nav-container li {
+    list-style: none;
+    padding: 10px;
+}
+
+.nav-holder {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-holder li {
+    font-weight: bold;
+}
+
+.nav-holder li:hover {
+    cursor: pointer;
+    background-color: rgb(86, 86, 201);
+    border-radius: 5px;
+    padding: 8px;
+    transition: background-color 0.3s ease;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .nav-bar {
+        flex-direction: column; /* Stack everything vertically */
+        align-items: center;
+    }
+
+    .nav-container {
+        flex-direction: column; /* Stack nav items vertically */
+        gap: 10px;
+    }
+
+    .nav-holder {
+        flex-direction: column; /* Stack login/signup links vertically */
+        gap: 5px;
+    }
+
+    .nav-holder li {
+        padding: 12px; /* Adjust padding for better mobile spacing */
+        width: 100%;   /* Make the nav items stretch full width */
+        text-align: center;
+    }
+}
