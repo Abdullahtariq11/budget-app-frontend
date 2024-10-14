@@ -1,0 +1,79 @@
+.heroSection-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+    text-align: center; /* Center-align text */
+    background-color: #f5f5f5; /* Optional background color */
+}
+
+.main-section {
+    padding: 10px;
+}
+
+.main-heading {
+    font-size: 3rem; /* Larger font for desktop */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px; /* Space between heading and button */
+}
+
+.main-section button {
+    background-color: rgb(127, 127, 227);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.main-section button:hover {
+    background-color: rgb(86, 86, 201); /* Slightly darker shade on hover */
+}
+
+h4 {
+    margin-top: 20px; /* Add some space between the button and subheadline */
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .heroSection-container {
+        padding: 30px; /* Reduce padding for mobile */
+    }
+
+    .main-heading {
+        font-size: 2rem; /* Reduce heading size for smaller screens */
+    }
+
+    h4 {
+        font-size: 1rem; /* Smaller subheadline */
+    }
+
+    .main-section button {
+        padding: 12px 25px; /* Slightly smaller button for mobile */
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .heroSection-container {
+        padding: 20px; /* Even less padding on very small screens */
+    }
+
+    .main-heading {
+        font-size: 1.5rem; /* Further reduce heading size */
+    }
+
+    h4 {
+        font-size: 0.9rem; /* Smaller subheadline */
+    }
+
+    .main-section button {
+        padding: 10px 20px; /* Small button on very small screens */
+        font-size: 0.8rem;
+    }
+}
