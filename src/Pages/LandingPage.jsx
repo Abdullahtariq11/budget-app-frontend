@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../Components/Shared/Navbar'
 import HeroSection from '../Components/LandingPage/HeroSection'
 import FeatureSection from '../Components/LandingPage/FeatureSection'
+import Footer from '../Components/Shared/Footer'
 
 function LandingPage() {
   return (
@@ -9,6 +10,7 @@ function LandingPage() {
         <Navbar/>
         <HeroSection/>
         <FeatureSection/>
+        <Footer/>
     </div>
   )
 }

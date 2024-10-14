@@ -1,0 +1,62 @@
+.footer-container {
+    display: flex;
+    background-color: rgb(127, 127, 227);
+    padding: 20px;
+    justify-content: center;
+    color: white;
+}
+
+.footer-list {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allows the content to wrap for smaller screens */
+}
+
+.footer-left {
+    flex: 1;
+    list-style: none;  /* Removes the bullet point from 'All rights reserved' */
+}
+
+.footer-right {
+    flex: 1;
+    text-align: right;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px; /* Space between links */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links li a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-list {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-right {
+        text-align: center;
+        flex: 1;
+    }
+
+    .footer-links {
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
