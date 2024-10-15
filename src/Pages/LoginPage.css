@@ -1,0 +1,23 @@
+.LoginPage {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.side {
+    min-height: 100vh;
+    width: 50%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .LoginPage {
+        flex-direction: column; /* Stack login and information sections vertically */
+        height: auto; /* Adjust height for scrolling on smaller screens */
+    }
+
+    .side {
+        width: 100%; /* Full width for each section on mobile */
+        min-height: 50vh; /* Adjust min-height for mobile */
+    }
+}

@@ -1,0 +1,37 @@
+.informationSide-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(127, 127, 227);
+    color: white; /* Ensure text is visible on the colored background */
+    text-align: center;
+    padding: 20px;
+}
+
+.informationSide-container img {
+    max-width: 150px; /* Resize logo to fit better */
+    margin-bottom: 20px;
+}
+
+.informationSide-main-heading {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.informationSide-container h4 {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .informationSide-main-heading {
+        font-size: 1.8rem; /* Adjust the heading size for smaller screens */
+    }
+
+    .informationSide-container h4 {
+        font-size: 1rem; /* Adjust the subheading size for mobile */
+    }
+}
