@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./LoginForm.css";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
 
 function LoginForm({setTab}) {
+  const {login}=useContext(AuthContext);
     const [username,setUsername]=useState("");
     const [password,setPassword]=useState("");
     const [Error,setError]=useState("");
 
+    //Handle login request logic
     const handleLogin= async(e)=>{
         e.preventDefault();
 
@@ -15,9 +18,10 @@ function LoginForm({setTab}) {
             const response = await axios.post("http://localhost:5115/api/Users/Login",{
                 username,
                 password
-            });
+            }); // sends the response to backend
+
             const {token}=response.data;
-            localStorage.setItem("authToken",token)
+            login(token);
             
         } 
         catch (error) {

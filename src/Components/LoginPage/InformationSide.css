@@ -9,6 +9,9 @@
     text-align: center;
     padding: 20px;
 }
+.information-nav-link {
+    text-decoration: none;
+}
 
 .informationSide-container img {
     max-width: 150px; /* Resize logo to fit better */

@@ -1,12 +1,15 @@
-import React from 'react'
-import "./InformationSide.css"
-
+import React from "react";
+import "./InformationSide.css";
+import { Link } from "react-router-dom";
 
 function InformationSide() {
   return (
-    <div className='informationSide-container'>
+    <div className="informationSide-container">
+      <Link to="/" className="information-nav-link">
         <img src="logoPathhere" alt="Logo goes here" />
-        <div className="informationSide-section">
+      </Link>
+
+      <div className="informationSide-section">
         <h1 className="informationSide-main-heading">
           Effortless Budgeting for Smarter Spending
         </h1>
@@ -16,7 +19,7 @@ function InformationSide() {
         in one place.
       </h4>
     </div>
-  )
+  );
 }
 
-export default InformationSide
+export default InformationSide;

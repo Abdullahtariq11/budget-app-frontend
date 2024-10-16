@@ -17,6 +17,9 @@
     list-style: none;
     padding: 10px;
 }
+.nav-link {
+    text-decoration: none;
+}
 
 .nav-holder {
     display: flex;

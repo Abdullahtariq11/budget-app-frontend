@@ -1,5 +1,6 @@
 import React from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 //Navbar
 
@@ -11,8 +12,10 @@ function Navbar() {
           <img src="path-to-logo.png" alt="Logo" className="logo" />
         </li>
         <div className="nav-holder">
-          <li>Login</li>  {/* Placeholder for now, will be replaced with React Router later */}
-          <li>Signup</li> {/* Placeholder for now, will be replaced with React Router later */}
+          {/* Placeholder for now, will be replaced with React Router later */}
+          <Link to="/LoginPage" className="nav-link">
+            <li>Get Started</li>
+          </Link>
         </div>
       </ul>
     </nav>

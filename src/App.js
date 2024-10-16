@@ -1,17 +1,21 @@
-
-import './App.css';
-import LandingPage from './Pages/LandingPage';
-import LoginPage from './Pages/LoginPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import "./App.css";
+import { AuthProvider } from "./context/AuthContext";
+import LandingPage from "./Pages/LandingPage";
+import LoginPage from "./Pages/LoginPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        {/*<LandingPage/>*/}
-        <LoginPage/>
-
-      </header>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Router>
+          <Routes>
+          <Route path="/" element={<LandingPage />}/>
+          <Route path="/LoginPage" element={<LoginPage />}/>
+          </Routes>
+        </Router>
+      </div>
+    </AuthProvider>
   );
 }
 
