@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 //create context
 export const AuthContext = createContext();
@@ -9,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); //holds user if logged in
   const [token, settoken] = useState(null); //holds jwt token
   const [loading, setLoading] = useState(true);
+
 
   //load user session from local storage if available
   useEffect(() => {
