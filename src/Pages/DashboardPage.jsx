@@ -6,6 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import DashboardHeader from '../Components/DashboardPage/DashboardHeader';
 import StatsOverview from '../Components/DashboardPage/StatsOverview';
+import Card from '../Components/DashboardPage/Card';
 
 function DashboardPage() {
   const {user,isAuthenticated}=useContext(AuthContext);
@@ -21,6 +22,7 @@ function DashboardPage() {
         <Navbar/>
         <DashboardHeader/>
         <div className="dashboard-content">
+          <Card/>
           <StatsOverview/>
         </div>
         <Footer/>
