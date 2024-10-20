@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 function DashboardHeader() {
   const { user } = useContext(AuthContext);
   return (
-    <div className="dahsboard-header">
+    <div className="dashboard-header">
       <h1>
         Welcome back {user?.firstName} {user?.lastName}!
       </h1>
