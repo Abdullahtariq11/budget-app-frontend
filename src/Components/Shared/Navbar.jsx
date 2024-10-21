@@ -19,10 +19,10 @@ function Navbar() {
             <Link to="/DashboardPage" className="nav-link">
               <li>Dashboard</li>
             </Link>
-            <Link to="/DashboardPage" className="nav-link">
+            <Link to="/DataManagement" className="nav-link">
               <li>Data Management</li>
             </Link>
-            <Link to="/DashboardPage" className="nav-link">
+            <Link to="/Setting" className="nav-link">
               <li>Setting</li>
             </Link>
             <Link to="/" className="nav-link">

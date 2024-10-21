@@ -1,0 +1,42 @@
+.data-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    padding: 20px;
+    background-color: #f0f4f8; /* Light background color for contrast */
+    border-bottom: 2px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+
+
+/* Styling for the heading */
+.data-header-container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333; /* Darker text color for contrast */
+    margin: 0;
+}
+
+/* Styling for the button */
+.data-header-container button {
+    background-color: rgb(86, 86, 201);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px; /* Add spacing for mobile layout */
+}
+
+/* Hover and focus styles for the button */
+.data-header-container button:hover,
+.data-header-container button:focus {
+    background-color: rgb(70, 70, 180);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+

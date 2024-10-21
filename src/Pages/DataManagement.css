@@ -1,0 +1,10 @@
+.Datamanagement-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.Datamanagement-container .footer{
+    margin-top: auto;
+}
+
