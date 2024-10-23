@@ -13,7 +13,7 @@ function TransactionTab() {
   const [totalItems, setTotalItems] = useState(0);
   const [Error, setError] = useState("");
   const { token } = useContext(AuthContext);
-  
+
   //totalPages=Math.ceil(totalItems/pageSize)
 
   const fetchData = async (token) => {
@@ -32,10 +32,13 @@ function TransactionTab() {
           },
         }
       );
-      setTransactions(response.data);
+
+      setTransactions(response.data.transactions);
+      setTotalItems(response.data.totalItems);
       //setTotalItems(response.data)
     } catch (error) {
       setError(error.response?.data?.Message || "Failed to fetch transactions");
+      console.log(Error);
     }
   };
 
@@ -43,20 +46,20 @@ function TransactionTab() {
     if (token) {
       fetchData(token);
     }
-  }, [ currentPage, token]);
+  }, [currentPage, token]);
 
-    // Handlers for pagination
-    const handleNextPage = () => {
-        if (currentPage < totalPages) {
-          setCurrentPage(currentPage + 1);
-        }
-      };
-    
-      const handlePreviousPage = () => {
-        if (currentPage > 1) {
-          setCurrentPage(currentPage - 1);
-        }
-      };
+  // Handlers for pagination
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   const applyFilter = () => {
     setCurrentPage(1); // Reset to first page when applying a new filter
@@ -71,12 +74,11 @@ function TransactionTab() {
       <div className="filter-section">
         <input type="text" placeholder="Search by description..." />
         <select onChange={(e) => setFilterOn(e.target.value)}>
-          <option value="">All Types</option>
+          <option value="">Filter Type</option>
           <option value="Type">Transaction Type</option>
           <option value="Category">Category</option>
         </select>
         {filterOn == "Category" ? (
-            
           <select onChange={(e) => setFilterQuery(e.target.value)}>
             <option value="">All Categories</option>
             <option value="Groceries">Groceries</option>
@@ -84,11 +86,17 @@ function TransactionTab() {
             <option value="Utilities">Utilities</option>
             {/* Add endpoint to get all available cvategories */}
           </select>
-        ) : (
+        ) : filterOn == "Type" ? (
           <select onChange={(e) => setFilterQuery(e.target.value)}>
             <option value="">All Types</option>
             <option value="Income">Income</option>
             <option value="Expense">Expense</option>
+          </select>
+        ) : (
+          <select disabled>
+            <option value="" disabled>
+              Select Filter{" "}
+            </option>
           </select>
         )}
         <button onClick={applyFilter}>Filter</button>
