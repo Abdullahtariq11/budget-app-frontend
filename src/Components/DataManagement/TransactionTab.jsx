@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import "./TransactionTab.css";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
@@ -8,15 +8,15 @@ function TransactionTab() {
   const [filterOn, setFilterOn] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
   const [totalPages, setTotalPages] = useState(0);
+  const [pageSize, setPageSize] = useState(2);
   const [totalItems, setTotalItems] = useState(0);
-  const [Error, setError] = useState("");
+  const [error, setError] = useState("");
   const { token } = useContext(AuthContext);
 
-  //totalPages=Math.ceil(totalItems/pageSize)
+  const fetchData = useCallback(async () => {
+    if (!token) return;
 
-  const fetchData = async (token) => {
     try {
       const response = await axios.get(
         "http://localhost:5115/api/Users/transactions",
@@ -33,61 +33,87 @@ function TransactionTab() {
         }
       );
 
-      setTransactions(response.data.transactions);
       setTotalItems(response.data.totalItems);
-      //setTotalItems(response.data)
-    } catch (error) {
-      setError(error.response?.data?.Message || "Failed to fetch transactions");
-      console.log(Error);
+      setTotalPages(Math.ceil(response.data.totalItems / pageSize));
+      setTransactions(response.data.transactions);
+      setError("");
+    } catch (err) {
+      setError(err.response?.data?.Message || "Failed to fetch transactions");
     }
-  };
+  }, [token, filterOn, filterQuery, currentPage, pageSize]);
 
   useEffect(() => {
-    if (token) {
-      fetchData(token);
-    }
-  }, [currentPage, token]);
+    fetchData();
+  }, [fetchData]);
 
   // Handlers for pagination
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+      setCurrentPage((prevPage) => prevPage + 1);
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
-  const applyFilter = () => {
-    setCurrentPage(1); // Reset to first page when applying a new filter
-    fetchData(token);
+  const handlePageSizeChange = (e) => {
+    const newSize = Number(e.target.value);
+    setPageSize(newSize);
+    setCurrentPage(1); // Reset to first page whenever page size changes
   };
+
+  const handleFilterChange = (filterType, value) => {
+    setCurrentPage(1); // Reset to first page when changing filter
+    if (filterType === "filterOn") {
+      setFilterOn(value);
+      setFilterQuery(""); // Reset filter query when filter type changes
+    } else if (filterType === "filterQuery") {
+      setFilterQuery(value);
+    }
+  };
+
+
 
   return (
     <div className="transaction-container">
       <h3>Transaction Data</h3>
 
+      {/* Error Handling */}
+      {error && <div className="error-message">{error}</div>}
+
       {/* Filter Section */}
       <div className="filter-section">
-        <input type="text" placeholder="Search by description..." />
-        <select onChange={(e) => setFilterOn(e.target.value)}>
+        <select onChange={handlePageSizeChange} value={pageSize}>
+          <option value={2}>2 Items</option>
+          <option value={5}>5 Items</option>
+          <option value={10}>10 Items</option>
+        </select>
+        <select
+          onChange={(e) => handleFilterChange("filterOn", e.target.value)}
+          value={filterOn}
+        >
           <option value="">Filter Type</option>
           <option value="Type">Transaction Type</option>
           <option value="Category">Category</option>
         </select>
-        {filterOn == "Category" ? (
-          <select onChange={(e) => setFilterQuery(e.target.value)}>
+        {filterOn === "Category" ? (
+          <select
+            onChange={(e) => handleFilterChange("filterQuery", e.target.value)}
+            value={filterQuery}
+          >
             <option value="">All Categories</option>
             <option value="Groceries">Groceries</option>
             <option value="transport">Transport</option>
             <option value="Utilities">Utilities</option>
-            {/* Add endpoint to get all available cvategories */}
           </select>
-        ) : filterOn == "Type" ? (
-          <select onChange={(e) => setFilterQuery(e.target.value)}>
+        ) : filterOn === "Type" ? (
+          <select
+            onChange={(e) => handleFilterChange("filterQuery", e.target.value)}
+            value={filterQuery}
+          >
             <option value="">All Types</option>
             <option value="Income">Income</option>
             <option value="Expense">Expense</option>
@@ -95,11 +121,11 @@ function TransactionTab() {
         ) : (
           <select disabled>
             <option value="" disabled>
-              Select Filter{" "}
+              Select Filter
             </option>
           </select>
         )}
-        <button onClick={applyFilter}>Filter</button>
+        
       </div>
 
       {/* Transactions Table */}
@@ -116,30 +142,42 @@ function TransactionTab() {
           </tr>
         </thead>
         <tbody>
-          {transactions.map((transaction) => (
+          {transactions.length > 0 ? (
+            transactions.map((transaction) => (
+              <tr key={transaction.id}>
+                <td>{transaction.id}</td>
+                <td>{transaction.amount}</td>
+                <td>{transaction.type === 0 ? "Income" : "Expense"}</td>
+                <td>{transaction.category}</td>
+                <td>{transaction.date}</td>
+                <td>{transaction.description}</td>
+                <td>
+                  <button className="edit-button">Edit</button>
+                  <button className="delete-button">Delete</button>
+                </td>
+              </tr>
+            ))
+          ) : (
             <tr>
-              <td>{transaction.id}</td>
-              <td>{transaction.amount}</td>
-              <td>{transaction.type == 0 ? "Income" : "Expense"}</td>
-              <td>{transaction.category}</td>
-              <td>{transaction.date}</td>
-              <td>{transaction.description}</td>
-              <td>
-                <button className="edit-button">Edit</button>
-                <button className="delete-button">Delete</button>
+              <td colSpan="7" className="no-data">
+                No transactions found
               </td>
             </tr>
-          ))}
-
-          {/* Add more rows as needed */}
+          )}
         </tbody>
       </table>
 
       {/* Pagination Controls */}
       <div className="pagination-controls">
-        <button>Previous</button>
-        <span>Page 1 of 5</span>
-        <button>Next</button>
+        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages || 1}
+        </span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+          Next
+        </button>
       </div>
     </div>
   );
