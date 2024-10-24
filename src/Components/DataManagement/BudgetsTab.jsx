@@ -11,6 +11,7 @@ function BudgetsTab() {
   const [filterQuery, setFilterQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
   const [pageSize, setPageSize] = useState(2);
 
   const fetchData = useCallback(async () => {
@@ -19,21 +20,57 @@ function BudgetsTab() {
       const response = await axios.get(
         "http://localhost:5115/api/Users/BudgetCategories",
         {
+          params: {
+            FilterOn: filterOn,
+            FilterQuery: filterQuery,
+            PageNumber: currentPage,
+            PageSize: pageSize,
+          },
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-
+      setTotalItems(response.data.totalItems);
+      setTotalPages(Math.ceil(response.data.totalItems / pageSize));
       setBudgets(response.data.budgets);
     } catch (err) {
       setError(err.response?.data?.Message || "Failed to fetch transactions");
     }
-  }, [token]);
+  }, [token, filterOn, filterQuery, currentPage, pageSize]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  // Handlers for pagination
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const handlePageSizeChange = (e) => {
+    const newSize = Number(e.target.value);
+    setPageSize(newSize);
+    setCurrentPage(1); // Reset to first page whenever page size changes
+  };
+
+  const handleFilterChange = (filterType, value) => {
+    setCurrentPage(1); // Reset to first page when changing filter
+    if (filterType === "filterOn") {
+      setFilterOn(value);
+      setFilterQuery(""); // Reset filter query when filter type changes
+    } else if (filterType === "filterQuery") {
+      setFilterQuery(value);
+    }
+  };
 
   return (
     <div className="budgets-tab-container">
@@ -43,34 +80,27 @@ function BudgetsTab() {
       {error && <div className="error-message">{error}</div>}
       {/* Filter Section */}
       <div className="filter-section">
-        <select >
+        <select onChange={handlePageSizeChange} value={pageSize}>
           <option value={2}>2 Items</option>
           <option value={5}>5 Items</option>
           <option value={10}>10 Items</option>
         </select>
         <select
-
+          onChange={(e) => handleFilterChange("filterOn", e.target.value)}
+          value={filterOn}
         >
-          <option value="">Filter Type</option>
-          <option value="Type">Transaction Type</option>
-          <option value="Category">Category</option>
+          <option value="">All</option>
+          <option value="categoryName">Category</option>
         </select>
-        {filterOn === "Category" ? (
+        {filterOn === "categoryName" ? (
           <select
-
+            onChange={(e) => handleFilterChange("filterQuery", e.target.value)}
+            value={filterQuery}
           >
-            <option value="">All Categories</option>
-            <option value="Groceries">Groceries</option>
+            <option value=""> All Categories</option>
+            <option value="Grocery">Grocery</option>
             <option value="transport">Transport</option>
-            <option value="Utilities">Utilities</option>
-          </select>
-        ) : filterOn === "Type" ? (
-          <select
-
-          >
-            <option value="">All Types</option>
-            <option value="Income">Income</option>
-            <option value="Expense">Expense</option>
+            <option value="Entertainment">Entertainment</option>
           </select>
         ) : (
           <select disabled>
@@ -117,6 +147,18 @@ function BudgetsTab() {
           )}
         </tbody>
       </table>
+      {/* Pagination Controls */}
+      <div className="pagination-controls">
+        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages || 1}
+        </span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+          Next
+        </button>
+      </div>
     </div>
   );
 }
