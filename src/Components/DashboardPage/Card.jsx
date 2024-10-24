@@ -15,7 +15,7 @@ function Card() {
           Authorization: `Bearer ${token}`,
         },
       });
-      setCardData(response.data);
+      setCardData(response.data.cards);
     } catch (error) {
       setError(error.response?.data?.Message || "Failed to fetch card data");
     }

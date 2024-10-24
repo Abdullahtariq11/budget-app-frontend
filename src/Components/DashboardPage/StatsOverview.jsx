@@ -24,7 +24,7 @@ function StatsOverview() {
           },
         }
       );
-      setCategories(response.data);
+      setCategories(response.data.budgets);
     } catch (error) {
       setError(
         error.response?.data?.Message || "Failed to fetch budget categories"

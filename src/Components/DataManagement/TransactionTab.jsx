@@ -146,7 +146,7 @@ function TransactionTab() {
             transactions.map((transaction) => (
               <tr key={transaction.id}>
                 <td>{transaction.id}</td>
-                <td>{transaction.amount}</td>
+                <td>${transaction.amount}</td>
                 <td>{transaction.type === 0 ? "Income" : "Expense"}</td>
                 <td>{transaction.category}</td>
                 <td>{transaction.date}</td>
