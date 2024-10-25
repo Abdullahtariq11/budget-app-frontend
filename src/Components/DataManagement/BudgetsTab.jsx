@@ -13,6 +13,7 @@ function BudgetsTab() {
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [pageSize, setPageSize] = useState(2);
+  const [editMode,setEditMode]=useState(false);
 
   const fetchData = useCallback(async () => {
     if (!token) return;
@@ -124,7 +125,7 @@ function BudgetsTab() {
           </tr>
         </thead>
         <tbody>
-          {budgets.length > 0 ? (
+          {budgets.length > 0 && !editMode ? (
             budgets.map((budget) => (
               <tr key={budget.id}>
                 <td>{budget.id}</td>
@@ -134,7 +135,7 @@ function BudgetsTab() {
                 <td>{budget.lastUpdated}</td>
                 <td>
                   <button className="edit-button">Edit</button>
-                  <button className="delete-button">Delete</button>
+                  <button  className="delete-button">Delete</button>
                 </td>
               </tr>
             ))
