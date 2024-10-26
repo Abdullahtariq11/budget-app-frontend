@@ -13,6 +13,7 @@ function TransactionTab() {
   const [totalItems, setTotalItems] = useState(0);
   const [error, setError] = useState("");
   const { token } = useContext(AuthContext);
+  const [categoriesData, setCategoriesdata] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [editData, setEditData] = useState({
     amount: 0,
@@ -20,7 +21,23 @@ function TransactionTab() {
     category: "",
     transactionDate: "",
     description: "",
+    budgetCategoryId: "",
   });
+
+  const getCategories = async () => {
+    if (!token) return;
+    try {
+      const response = await axios.get(
+        "http://localhost:5115/api/Users/BudgetCategories",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setCategoriesdata(response.data.budgets);
+    } catch (err) {}
+  };
 
   const updateTransaction = async (id, updatedData) => {
     if (!token) return; // Ensure the token is available
@@ -32,12 +49,13 @@ function TransactionTab() {
       category: updatedData.category, // Category as a string
       transactionDate: updatedData.transactionDate, // Convert to ISO string
       description: updatedData.description, // Description as a string
+      budgetCategoryId: updatedData.budgetCategoryId,
     };
 
     try {
       await axios.put(
         `http://localhost:5115/api/Users/transactions/${id}`, // Use the transaction ID in the URL
-        dataToUpdate,// The data to be updated
+        dataToUpdate, // The data to be updated
         {
           headers: {
             Authorization: `Bearer ${token}`, // Pass the token for authorization
@@ -54,7 +72,9 @@ function TransactionTab() {
   };
 
   const handleDeleteClick = async (id) => {
-    alert("This will delete data do you confirm");
+    const isConfirmed = window.confirm("Are you sure you want to delete this transaction?");
+    if (!isConfirmed) return; // If the user cancels, do nothing
+  
     try {
       await axios.delete(`http://localhost:5115/api/Users/transactions/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -97,6 +117,10 @@ function TransactionTab() {
     fetchData();
   }, [fetchData]);
 
+  useEffect(() => {
+    getCategories();
+  }, [editMode]);
+
   // Handlers for pagination
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -117,6 +141,7 @@ function TransactionTab() {
   };
 
   const handleFilterChange = (filterType, value) => {
+    getCategories();
     setCurrentPage(1); // Reset to first page when changing filter
     if (filterType === "filterOn") {
       setFilterOn(value);
@@ -133,19 +158,26 @@ function TransactionTab() {
     }));
   };
 
+  const handleEditCategory = (field, value, key) => {
+    setEditData((prev) => ({
+      ...prev,
+      [field]: value,
+      budgetCategoryId: key, // Parse amount as a number
+    }));
+  };
+
   const initialiseEditData = (transaction) => {
     setEditData({
       id: transaction.id,
       amount: parseFloat(transaction.amount),
-      transactionType: transaction.type,
+      transactionType: transaction.transactionType ?? "",
       category: transaction.category,
       transactionDate: transaction.transactionDate,
       description: transaction.description,
+      budgetCategoryId: transaction.budgetCategoryId 
     });
     setEditMode(true);
   };
-
-  const saveChanges = () => {};
 
   return (
     <div className="transaction-container">
@@ -167,7 +199,8 @@ function TransactionTab() {
         >
           <option value="">Filter Type</option>
           <option value="Type">Transaction Type</option>
-          <option value="Category">Category</option>
+          <option value="Category">Category</option>{" "}
+          {/*Add categories recieve from backend here to populate this */}
         </select>
         {filterOn === "Category" ? (
           <select
@@ -175,9 +208,11 @@ function TransactionTab() {
             value={filterQuery}
           >
             <option value="">All Categories</option>
-            <option value="Groceries">Groceries</option>
-            <option value="transport">Transport</option>
-            <option value="Utilities">Utilities</option>
+            {categoriesData.map((category) => (
+              <option key={category.id} value={category.categoryName}>
+                {category.categoryName}
+              </option>
+            ))}
           </select>
         ) : filterOn === "Type" ? (
           <select
@@ -228,26 +263,37 @@ function TransactionTab() {
                       />
                     </td>
                     <td>
-                      <select
-                        value={editData.type}
+                      <select 
+                        value={editData.transactionType}
                         onChange={(e) =>
-                          handleEditChange("type", e.target.value)
+                          handleEditChange("transactionType", e.target.value)
                         }
                       >
+                       <option value="" disabled></option>
                         <option value={"0"}>Income</option>
                         <option value={"1"}>Expense</option>
                       </select>
                     </td>
                     <td>
                       <select
-                        value={editData.category}
-                        onChange={(e) =>
-                          handleEditChange("category", e.target.value)
-                        }
+                        value={editData.budgetCategoryId}
+                        onChange={(e) => {
+                          const selectedCategory = categoriesData.find(
+                            (category) => category.id === e.target.value
+                          );
+                          handleEditCategory(
+                            "category",
+                            selectedCategory.categoryName,
+                            selectedCategory.id
+                          );
+                        }}
                       >
-                        <option value={"transport"}>Transport</option>
-                        <option value={"Entertainment"}>Entertainment</option>
-                        <option value={"Grocery"}>Grocery</option>
+                        <option value="">Select Category</option>
+                        {categoriesData.map((category) => (
+                          <option key={category.id} value={category.id}>
+                            {category.categoryName}
+                          </option>
+                        ))}
                       </select>
                     </td>
                     <td>{transaction.transactionDate}</td>
@@ -294,7 +340,7 @@ function TransactionTab() {
                         Edit
                       </button>
                       <button
-                        onClick={handleDeleteClick}
+                        onClick={()=>handleDeleteClick(transaction.id)}
                         className="delete-button"
                       >
                         Delete

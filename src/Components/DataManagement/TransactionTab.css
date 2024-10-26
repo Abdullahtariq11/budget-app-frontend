@@ -1,99 +1,202 @@
 .transaction-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #f0f4f8;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Header Styling */
+.transaction-container h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #4a4a4a;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: #f44336;
+  background-color: #fce4e4;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Filter Section Styling */
+.filter-section {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-section input,
+.filter-section select,
+.filter-section button {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 220px;
+}
+
+.filter-section button {
+  background-color: #5864d8;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.filter-section button:hover {
+  background-color: #4752b2;
+}
+
+/* Transaction Table Styling */
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.transaction-table th,
+.transaction-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.transaction-table th {
+  background-color: #5864d8;
+  color: #fff;
+  font-weight: bold;
+}
+
+.transaction-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.transaction-table tr:hover {
+  background-color: #eef1f7;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+  .transaction-table, .transaction-table thead, .transaction-table tbody, .transaction-table th, .transaction-table td, .transaction-table tr {
+    display: block;
   }
-  
-  /* Styling for the header */
-  .transaction-container h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #333;
+
+  .transaction-table thead tr {
+    display: none;
   }
-  
-  /* Styling for the filter section */
-  .filter-section {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .filter-section input,
-  .filter-section select,
-  .filter-section button {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .filter-section button {
-    background-color: #5864d8;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  /* Styling for the transaction table */
-  .transaction-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-  }
-  
-  .transaction-table th,
-  .transaction-table td {
-    padding: 12px 15px;
+
+  .transaction-table tr {
+    margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
   }
-  
-  .transaction-table th {
-    background-color: #5864d8;
-    color: #fff;
+
+  .transaction-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .transaction-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    padding-left: 15px;
     font-weight: bold;
+    text-align: left;
   }
-  
-  .transaction-table tr:hover {
-    background-color: #f1f1f1;
+}
+
+/* Action Buttons */
+.edit-button,
+.delete-button {
+  padding: 8px 14px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #43a047;
+}
+
+.delete-button:hover {
+  background-color: #e53935;
+}
+
+/* Pagination Controls Styling */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pagination-controls button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #5864d8;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:hover {
+  background-color: #4752b2;
+}
+
+.pagination-controls span {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .transaction-container {
+    padding: 15px;
   }
-  
-  /* Styling for action buttons */
-  .edit-button,
-  .delete-button {
-    padding: 6px 12px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
+  .filter-section {
+    flex-direction: column;
+    gap: 8px;
   }
-  
-  .edit-button {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .delete-button {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  /* Styling for pagination controls */
+
   .pagination-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
+    flex-direction: column;
+    gap: 8px;
   }
-  
-  .pagination-controls button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    background-color: #5864d8;
-    color: white;
-    cursor: pointer;
+
+  .transaction-container h3 {
+    font-size: 1.5rem;
   }
-  
-  .pagination-controls span {
-    font-size: 1rem;
+
+  .transaction-table td, .transaction-table th {
+    font-size: 0.9rem;
+    padding: 8px 5px;
   }
+
+  .transaction-table td::before {
+    font-size: 0.9rem;
+  }
+}
