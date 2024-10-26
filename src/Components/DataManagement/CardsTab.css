@@ -1,59 +1,83 @@
-.cards-tab-container{
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Styling for the header */
-  .cards-tab-container h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
+/* Container Styling */
+.cards-tab-container {
+  padding: 20px;
+  background-color: #f0f4f8;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
 
-  
-  /* Styling for the transaction table */
-  .cards-table{
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+/* Header Styling */
+.cards-tab-container h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #4a4a4a;
+}
+
+/* Table Styling */
+.cards-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.cards-table th,
+.cards-table td {
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.cards-table th {
+  background-color: #5864d8;
+  color: #fff;
+  font-weight: bold;
+}
+
+.cards-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.cards-table tr:hover {
+  background-color: #eef1f7;
+}
+
+/* Action Button Styling */
+.edit-button,
+.delete-button {
+  padding: 8px 14px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #43a047;
+}
+
+.delete-button:hover {
+  background-color: #e53935;
+}
+
+/* Additional Styling for Responsiveness */
+@media (max-width: 768px) {
+  .cards-tab-container {
+    padding: 15px;
   }
-  
-  .cards-table th,
-  .cards-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
+
+  .cards-table th, .cards-table td {
+    font-size: 0.9rem;
+    padding: 12px 10px;
   }
-  
-  .cards-table th {
-    background-color: #5864d8;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  .cards-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Styling for action buttons */
-  .edit-button,
-  .delete-button {
-    padding: 6px 12px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .edit-button {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .delete-button {
-    background-color: #f44336;
-    color: white;
-  }
-  
+}

@@ -1,10 +1,22 @@
-.Datamanagement-container{
+/* Make sure html and body take up the full height */
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  /* Container Setup */
+  .Datamanagement-container {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-}
-
-.Datamanagement-container .footer{
-    margin-top: auto;
-}
-
+    min-height: 100vh; /* Full viewport height */
+  }
+  
+  /* Main content should take up available space */
+  .tab-data {
+    flex-grow: 1; /* This makes the content area expand */
+  }
+  
+  /* Footer should always be at the bottom */
+  .Datamanagement-container .footer {
+    margin-top: auto; /* Pushes the footer to the bottom */
+  }

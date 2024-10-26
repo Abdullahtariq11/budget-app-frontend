@@ -75,7 +75,7 @@ function BudgetsTab() {
 
   return (
     <div className="budgets-tab-container">
-      <h3>Card Data</h3>
+      <h3>Categories Data</h3>
 
       {/*Error Handling */}
       {error && <div className="error-message">{error}</div>}
