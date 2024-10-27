@@ -46,10 +46,10 @@ function TransactionTab() {
     const dataToUpdate = {
       amount: parseFloat(updatedData.amount), // Ensure it's a number
       transactionType: updatedData.transactionType, // Should be a string "0" or "1"
-      category: updatedData.category, // Category as a string
+      category: updatedData.category==undefined?"":updatedData.category, // Category as a string
       transactionDate: updatedData.transactionDate, // Convert to ISO string
       description: updatedData.description, // Description as a string
-      budgetCategoryId: updatedData.budgetCategoryId,
+      budgetCategoryId: updatedData.budgetCategoryId==undefined?"":updatedData.budgetCategoryId,
     };
 
     try {
@@ -278,7 +278,7 @@ function TransactionTab() {
                       <select
                         value={editData.budgetCategoryId}
                         onChange={(e) => {
-                          const selectedCategory = categoriesData.find(
+                          const selectedCategory = e.target.value==""?"": categoriesData.find(
                             (category) => category.id === e.target.value
                           );
                           handleEditCategory(
