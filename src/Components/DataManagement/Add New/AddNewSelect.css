@@ -1,0 +1,10 @@
+.AddNewSelect-container
+.AddNewSelect-container input,
+.AddNewSelect-container select{
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 220px;
+}

@@ -1,0 +1,70 @@
+.addEntity-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+   
+}
+
+/* Styling for the form itself */
+.Add-Form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: white;
+    padding: 30px;
+    width: 80%;
+    max-width: 500px; /* Limit max width for better readability */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for input fields */
+.Add-Form input,
+.Add-Form select,
+.Add-Form textarea {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease; /* Smooth transition */
+}
+
+.Add-Form input:focus,
+.Add-Form select:focus,
+.Add-Form textarea:focus {
+    border-color: #007bff; /* Highlighted border color on focus */
+}
+
+/* Styling for select fields */
+.Add-Form select {
+    appearance: none;
+    background-color: #fff;
+}
+
+/* Styling for textarea */
+.Add-Form textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    min-height: 80px;
+}
+
+/* Styling for form buttons */
+.Add-Form button {
+    padding: 12px;
+    font-size: 1rem;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.Add-Form button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
