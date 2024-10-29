@@ -23,6 +23,35 @@ export const createTransaction = async (transactionData, token) => {
   }
 };
 
+export const createBudget = async (budgetData, token) => {
+  try {
+    const response = await axios.post(`${API_Base_URL}BudgetCategories`, budgetData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    console.error("Failed to create budget:", error.response?.data?.Message);
+    throw error;
+  }
+};
+export const createCard = async (budgetData, token) => {
+  try {
+    const response = await axios.post(`${API_Base_URL}Card`, budgetData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    console.error("Failed to create card:", error.response?.data?.Message);
+    throw error;
+  }
+};
+
 
 export const fetchCardData= async(token)=>{
     if (!token) return;

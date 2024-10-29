@@ -260,6 +260,7 @@ function TransactionTab() {
                           handleEditChange("amount", e.target.value)
                         }
                         value={editData.amount}
+                        required
                       />
                     </td>
                     <td>
@@ -268,6 +269,7 @@ function TransactionTab() {
                         onChange={(e) =>
                           handleEditChange("transactionType", e.target.value)
                         }
+                        required
                       >
                        <option value="" disabled></option>
                         <option value={"0"}>Income</option>
@@ -287,6 +289,7 @@ function TransactionTab() {
                             selectedCategory.id
                           );
                         }}
+                        required
                       >
                         <option value="">Select Category</option>
                         {categoriesData.map((category) => (
@@ -304,6 +307,7 @@ function TransactionTab() {
                           handleEditChange("description", e.target.value)
                         }
                         value={editData.description}
+                        required
                       />
                     </td>
                     <td>

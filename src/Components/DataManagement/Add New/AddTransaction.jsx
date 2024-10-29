@@ -3,7 +3,7 @@ import "./AddEntity.css";
 import { AuthContext } from "../../../context/AuthContext";
 import { fetchBudgetData, fetchCardData, createTransaction } from "../../../Service/DataService";
 
-function AddTransaction() {
+function AddTransaction({cancelHandler}) {
   const { token } = useContext(AuthContext);
   const [cards, setCards] = useState([]);
   const [budgetCategories, setBudgetCategories] = useState([]);
@@ -39,7 +39,9 @@ function AddTransaction() {
     e.preventDefault();
     try {
       const response = await createTransaction(transactionData, token);
-      console.log("Transaction created successfully:", response);
+      //console.log("Transaction created successfully:", response);
+      alert("Transaction created successfully")
+      cancelHandler();
       // Optional: Reset form or display success message if needed
     } catch (error) {
       console.error("Error creating transaction:", error);
