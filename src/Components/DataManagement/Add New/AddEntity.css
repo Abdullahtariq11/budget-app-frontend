@@ -1,70 +1,117 @@
+/* Container styling */
 .addEntity-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f5f5f5;
-    padding: 20px;
-   
+     /* Soft background color */
+    padding: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+    gap: 2px;
 }
 
 /* Styling for the form itself */
 .Add-Form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    background-color: white;
-    padding: 30px;
-    width: 80%;
-    max-width: 500px; /* Limit max width for better readability */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 20px;
+    background-color: #ffffff; /* White background for the form */
+    padding: 35px;
+    width: 100%;
+    max-width: 480px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border: 1px solid #e4e6eb;
+    transition: box-shadow 0.3s ease;
+}
+
+.Add-Form:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Slight lift on hover */
+}
+
+/* Styling for form heading */
+.Add-Form h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
 }
 
 /* Styling for input fields */
 .Add-Form input,
 .Add-Form select,
 .Add-Form textarea {
-    padding: 12px;
+    padding: 14px;
     font-size: 1rem;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     outline: none;
     width: 100%;
     box-sizing: border-box;
-    transition: border-color 0.3s ease; /* Smooth transition */
+    background-color: #fafafa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .Add-Form input:focus,
 .Add-Form select:focus,
 .Add-Form textarea:focus {
-    border-color: #007bff; /* Highlighted border color on focus */
+    border-color: #007bff; /* Modern blue for focus */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.15); /* Soft glow on focus */
+    background-color: #ffffff;
 }
 
 /* Styling for select fields */
 .Add-Form select {
     appearance: none;
-    background-color: #fff;
+    background-color: #f9f9f9;
+    font-size: 1rem;
 }
 
 /* Styling for textarea */
 .Add-Form textarea {
-    resize: vertical; /* Allow vertical resizing only */
-    min-height: 80px;
+    resize: vertical; /* Vertical resizing only */
+    min-height: 100px;
+    font-size: 1rem;
 }
 
 /* Styling for form buttons */
 .Add-Form button {
-    padding: 12px;
+    padding: 14px;
     font-size: 1rem;
     color: white;
-    background-color: #007bff;
+    background-color: rgb(127, 127, 227);
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2); /* Button shadow for emphasis */
 }
 
 .Add-Form button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Subtle lift on hover */
+    box-shadow: 0 6px 18px rgba(0, 123, 255, 0.25); /* Enhanced shadow on hover */
+}
+
+/* Button active effect */
+.Add-Form button:active {
+    transform: translateY(0); /* Reset lift on click */
+    background-color: #004494;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .Add-Form {
+        padding: 30px;
+        gap: 15px;
+    }
+
+    .Add-Form button {
+        padding: 12px;
+    }
 }

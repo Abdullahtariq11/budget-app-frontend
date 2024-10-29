@@ -16,11 +16,11 @@ function AddNewPage({ tab,selectTab, setIsAddNew }) {
     <div className="AddNewPage-container">
       <div className="AddNewPage-content">
         {tab === "Transaction" ? (
-          <AddTransaction />
+          <AddTransaction cancelHandler={cancelHandler} />
         ) : tab === "Card" ? (
-          <AddCard />
+          <AddCard cancelHandler={cancelHandler}/>
         ) : (
-          <AddBudget />
+          <AddBudget cancelHandler={cancelHandler}/>
         )}
         <div className="AddNewPage-buttons">
           <button onClick={cancelHandler}>Cancel</button>
