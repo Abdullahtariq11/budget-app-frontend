@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import "./UserSetting.css";
 import { AuthContext } from '../../context/AuthContext';
-import { UserDetailInfo } from '../../Service/DataService';
+import { editUser, UserDetailInfo } from '../../Service/DataService';
 
 function UserSetting() {
     const { token } = useContext(AuthContext);
@@ -22,9 +22,19 @@ function UserSetting() {
         loadUserData();
     }, [token]);
 
+    
 
 
-    const handleEditToggle = () => setIsEdit((prev) => !prev);
+
+    const handleEditToggle = () => {
+        setIsEdit((prev) => !prev);
+        if(isEdit)
+        {
+            editUser(userData,token);
+            alert("Success");
+        }
+
+    };
 
     const handleEditChange = (field, value) => {
         setUserData((prev) => ({
@@ -53,7 +63,7 @@ function UserSetting() {
                     <label>Phone Number</label>
                     <input onChange={(e)=>handleEditChange("phoneNumber",e.target.value)} required disabled={!isEdit} value={userData.phoneNumber || ""} type="tel" placeholder='Phone Number' />
                 </div>
-                <button type="button" onClick={handleEditToggle} className="edit-button">
+                <button type="button" onClick={handleEditToggle} className="userSetting-edit-button">
                     {isEdit ? "Save Changes" : "Edit"}
                 </button>
             </form>

@@ -34,7 +34,7 @@ export const createBudget = async (budgetData, token) => {
     return response.data; 
   } catch (error) {
     console.error("Failed to create budget:", error.response?.data?.Message);
-    throw error;
+    return[];
   }
 };
 
@@ -49,7 +49,7 @@ export const UserDetailInfo = async ( token) => {
     return response.data; 
   } catch (error) {
     console.error("Failed to get user details:", error.response?.data?.Message);
-    throw error;
+    return[];
   }
 };
 
@@ -64,7 +64,22 @@ export const createCard = async (budgetData, token) => {
     return response.data; 
   } catch (error) {
     console.error("Failed to create card:", error.response?.data?.Message);
-    throw error;
+    return[];
+  }
+};
+
+export const editUser = async (userData, token) => {
+  try {
+    const response = await axios.put(`${API_Base_URL}Edit`, userData, { 
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    console.error("Failed to edit user:", error.response?.data?.Message);
+    return[];
   }
 };
 
