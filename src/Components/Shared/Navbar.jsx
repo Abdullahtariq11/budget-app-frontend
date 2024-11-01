@@ -22,7 +22,7 @@ function Navbar() {
             <Link to="/DataManagement" className="nav-link">
               <li>Data Management</li>
             </Link>
-            <Link to="/Setting" className="nav-link">
+            <Link to="/SettingsPage" className="nav-link">
               <li>Setting</li>
             </Link>
             <Link to="/" className="nav-link">

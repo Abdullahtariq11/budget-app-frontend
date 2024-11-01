@@ -34,9 +34,25 @@ export const createBudget = async (budgetData, token) => {
     return response.data; 
   } catch (error) {
     console.error("Failed to create budget:", error.response?.data?.Message);
-    throw error;
+    return[];
   }
 };
+
+export const UserDetailInfo = async ( token) => {
+  try {
+    const response = await axios.get(`${API_Base_URL}DetailUserInfo`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    console.error("Failed to get user details:", error.response?.data?.Message);
+    return[];
+  }
+};
+
 export const createCard = async (budgetData, token) => {
   try {
     const response = await axios.post(`${API_Base_URL}Card`, budgetData, {
@@ -48,9 +64,41 @@ export const createCard = async (budgetData, token) => {
     return response.data; 
   } catch (error) {
     console.error("Failed to create card:", error.response?.data?.Message);
-    throw error;
+    return[];
   }
 };
+
+export const editUser = async (userData, token) => {
+  try {
+    const response = await axios.put(`${API_Base_URL}Edit`, userData, { 
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    console.error("Failed to edit user:", error.response?.data?.Message);
+    return[];
+  }
+};
+
+export const LogoutUser= async(token)=>{
+  if (!token) return;
+  try {
+    const response = await axios.post(`${API_Base_URL}Logout`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+   return response.data
+
+  } catch (err) {
+    console.log(err.response?.data?.Message);
+    return[];
+  }
+}
 
 
 export const fetchCardData= async(token)=>{
