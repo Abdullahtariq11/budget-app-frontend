@@ -5,13 +5,14 @@ import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm({ setTab }) {
-  const { login, loading, isAuthenticated } = useContext(AuthContext);
+  const { login, loading, isAuthenticated, setupComplete } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [Error, setError] = useState("");
-  const navigate = useNavigate();//Initialise use navigation
+  const [error, setError] = useState("");
 
-  //Handle login request logic
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Handle login request logic
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -21,21 +22,22 @@ function LoginForm({ setTab }) {
           username,
           password,
         }
-      ); // sends the response to backend
+      ); // sends the request to backend
 
       const { token } = response.data;
-      login(token);
-      navigate("/DashboardPage");//redirect after successful login
+      const isSetup = await login(token); // Await login to get setupComplete status
+      isSetup ? navigate("/DashboardPage") : navigate("/InitialSetupPage");
     } catch (error) {
-      setError(error.response.data.Message);
+      setError(error.response?.data?.Message || "Login failed. Please try again.");
     }
   };
-  // This is to make sure user is navigated to dashboard during span of calid token
+
+  // Ensure user is navigated to the appropriate page if already logged in
   useEffect(() => {
     if (isAuthenticated && !loading) {
-      navigate("/DashboardPage");
+      setupComplete ? navigate("/DashboardPage") : navigate("/InitialSetupPage");
     }
-  }, [isAuthenticated, loading, navigate]);
+  }, [isAuthenticated, loading, setupComplete, navigate]);
 
   return (
     <div className="login-form-container">
@@ -43,7 +45,7 @@ function LoginForm({ setTab }) {
       <form className="login-form" onSubmit={handleLogin}>
         <input
           type="text"
-          placeholder="username"
+          placeholder="Username"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
           required
@@ -55,6 +57,7 @@ function LoginForm({ setTab }) {
           value={password}
           required
         />
+        {error && <p className="error-message">{error}</p>}
         <button type="submit">Login</button>
         <p>Forgot Password?</p>
         <p>

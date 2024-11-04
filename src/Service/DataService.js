@@ -1,5 +1,4 @@
 //src/services/dataService.js
-
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
@@ -19,6 +18,21 @@ export const createTransaction = async (transactionData, token) => {
     return response.data; // Assuming the response contains the created transaction data
   } catch (error) {
     console.error("Failed to create transaction:", error.response?.data?.Message);
+    throw error;
+  }
+};
+
+export const InitalSetup = async (setupData, token) => {
+  try {
+    const response = await axios.post(`${API_Base_URL}InitialSetup`, setupData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data; // Return both the new token and setupComplete status
+  } catch (error) {
+    console.error("Failed to complete initial setup:", error.response?.data?.Message);
     throw error;
   }
 };
@@ -83,6 +97,18 @@ export const editUser = async (userData, token) => {
   }
 };
 
+export const Signup = async (signUpData) => {
+  const { login } = useContext(AuthContext);
+  try {
+    const response = await axios.post(`${API_Base_URL}Register`, signUpData);
+    const { token } = response.data;
+    login(token);
+  } catch (error) {
+    console.error("Failed to edit user:", error.response?.data?.Message);
+    return[];
+  }
+};
+
 export const LogoutUser= async(token)=>{
   if (!token) return;
   try {
@@ -94,11 +120,11 @@ export const LogoutUser= async(token)=>{
 
    return response.data
 
-  } catch (err) {
-    console.log(err.response?.data?.Message);
+  } catch (error) {
+    console.log(error.response?.data?.Message);
     return[];
   }
-}
+};
 
 
 export const fetchCardData= async(token)=>{
