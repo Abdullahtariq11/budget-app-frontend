@@ -9,12 +9,16 @@ import StatsOverview from '../Components/DashboardPage/StatsOverview';
 import Card from '../Components/DashboardPage/Card';
 
 function DashboardPage() {
-  const {user,isAuthenticated}=useContext(AuthContext);
+  const {user,isAuthenticated,setupComplete}=useContext(AuthContext);
   const navigate=useNavigate();
   // Redirect to login if not authenticated
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/LoginPage"); // Redirect to login page if not authenticated
+    }
+    else if(isAuthenticated && !setupComplete)
+    {
+      navigate("/InitialSetupPage");
     }
   }, [isAuthenticated, navigate]);
   return (

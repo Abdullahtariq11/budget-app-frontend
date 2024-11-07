@@ -1,0 +1,17 @@
+/* InitialSetupMessage.css */
+.setup-message {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .setup-message h2 {
+    color: #333;
+  }
+  
+  .setup-message p {
+    color: #666;
+  }

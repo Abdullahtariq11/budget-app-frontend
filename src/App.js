@@ -7,8 +7,10 @@ import DashboardPage from './Pages/DashboardPage';
 import DataManagement from './Pages/DataManagement';
 import { useContext } from 'react';
 import SettingsPage from './Pages/SettingsPage';
+import InitialSetupPage from './Pages/InitialSetupPage';
 
 function App() {
+
 
   return (
     <AuthProvider>
@@ -20,6 +22,7 @@ function App() {
           <Route path="/DashboardPage" element={<DashboardPage/>}/>
           <Route path="/DataManagement" element={<DataManagement/>}/>
           <Route path="/SettingsPage" element={<SettingsPage/>}/>
+          <Route path="/InitialSetupPage" element={<InitialSetupPage/>}/>
           </Routes>
         </Router>
       </div>
