@@ -2,7 +2,6 @@
   display: flex;
   max-width: 100%; /* Set to 100% to cover the full width */
   justify-content: center;
-  
   padding: 20px; /* Add padding for spacing */
   border-bottom: 1px solid #ddd; /* Bottom border to separate the header */
 }

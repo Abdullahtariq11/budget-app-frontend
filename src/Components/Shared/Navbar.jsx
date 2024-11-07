@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom"; // Use NavLink instead of Link
 import { AuthContext } from "../../context/AuthContext";
-
-//Navbar
 
 function Navbar() {
   const { isAuthenticated, logout } = useContext(AuthContext);
+
   return (
     <nav className="nav-bar" aria-label="Main navigation">
       <ul className="nav-container">
@@ -15,27 +14,36 @@ function Navbar() {
         </li>
         {isAuthenticated ? (
           <div className="nav-holder">
-            {/* Placeholder for now, will be replaced with React Router later */}
-            <Link to="/DashboardPage" className="nav-link">
+            <NavLink
+              to="/DashboardPage"
+              className={({ isActive }) => (isActive ? "nav-link active-tab" : "nav-link")}
+            >
               <li>Dashboard</li>
-            </Link>
-            <Link to="/DataManagement" className="nav-link">
+            </NavLink>
+            <NavLink
+              to="/DataManagement"
+              className={({ isActive }) => (isActive ? "nav-link active-tab" : "nav-link")}
+            >
               <li>Data Management</li>
-            </Link>
-            <Link to="/SettingsPage" className="nav-link">
+            </NavLink>
+            <NavLink
+              to="/SettingsPage"
+              className={({ isActive }) => (isActive ? "nav-link active-tab" : "nav-link")}
+            >
               <li>Setting</li>
-            </Link>
-            <Link to="/" className="nav-link">
-              <li onClick={()=>logout()}>Logout</li>
-            </Link>
-
+            </NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "nav-link active-tab" : "nav-link")}
+            >
+              <li onClick={() => logout()}>Logout</li>
+            </NavLink>
           </div>
         ) : (
           <div className="nav-holder">
-            {/* Placeholder for now, will be replaced with React Router later */}
-            <Link to="/LoginPage" className="nav-link">
+            <NavLink to="/LoginPage" className="nav-link">
               <li>Get Started</li>
-            </Link>
+            </NavLink>
           </div>
         )}
       </ul>

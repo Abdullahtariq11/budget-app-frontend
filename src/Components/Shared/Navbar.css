@@ -2,6 +2,11 @@
     text-decoration: none;
     color: white;
 }
+.active-tab
+{
+    background-color: rgb(86, 86, 201);
+}
+
 .nav-bar {
     display: flex;
     background-color: rgb(127, 127, 227);

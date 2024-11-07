@@ -69,7 +69,7 @@
 
 /* Styling for the button */
 .userSetting-edit-button {
-    background-color: #007bff;
+    background-color: rgb(127, 127, 227);
     color: #ffffff;
     padding: 14px;
     border: none;
@@ -85,13 +85,13 @@
 }
 
 .userSetting-edit-button-button:hover {
-    background-color: #0056b3;
+    background-color: rgb(86, 86, 201);
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(0, 123, 255, 0.25);
 }
 
 .userSetting-edit-button:active {
-    background-color: #004494;
+    background-color: rgb(41, 41, 122);
     transform: translateY(0);
 }
 .userSetting-cancel-button{
