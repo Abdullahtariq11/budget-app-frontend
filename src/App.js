@@ -8,6 +8,7 @@ import DataManagement from './Pages/DataManagement';
 import { useContext } from 'react';
 import SettingsPage from './Pages/SettingsPage';
 import InitialSetupPage from './Pages/InitialSetupPage';
+import ResetPassword from './Components/LoginPage/ResetPassword';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/DataManagement" element={<DataManagement/>}/>
           <Route path="/SettingsPage" element={<SettingsPage/>}/>
           <Route path="/InitialSetupPage" element={<InitialSetupPage/>}/>
+          <Route path='/ResetPassword' element={<ResetPassword/>}/>
           </Routes>
         </Router>
       </div>

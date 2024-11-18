@@ -5,9 +5,9 @@ import "./InitialSetupPortal.css";
 function InitialSetupCard({ nextStep }) {
   const [cardData, setCardData] = useState({
     cardName: "",
-    balance: 0,
-    availableBalance: 0,
-    totalCreditLimit: 0,
+    balance: null,
+    availableBalance: null,
+    totalCreditLimit: null,
     cardType: "",
     subCardType: "",
   });

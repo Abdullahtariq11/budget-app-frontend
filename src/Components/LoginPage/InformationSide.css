@@ -14,8 +14,8 @@
 }
 
 .informationSide-container img {
-    max-width: 150px; /* Resize logo to fit better */
-    margin-bottom: 20px;
+    max-width: 250px; /* Resize logo to fit better */
+    margin-bottom: 0px;
 }
 
 .informationSide-main-heading {
