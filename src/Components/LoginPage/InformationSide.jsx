@@ -1,12 +1,13 @@
 import React from "react";
 import "./InformationSide.css";
 import { Link } from "react-router-dom";
+import logo from "../../Assets/logo.png"; 
 
 function InformationSide() {
   return (
     <div className="informationSide-container">
       <Link to="/" className="information-nav-link">
-        <img src="logoPathhere" alt="Logo goes here" />
+        <img src={logo} alt="Logo goes here" />
       </Link>
 
       <div className="informationSide-section">

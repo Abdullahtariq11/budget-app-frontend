@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Navbar.css";
 import { NavLink } from "react-router-dom"; // Use NavLink instead of Link
 import { AuthContext } from "../../context/AuthContext";
+import logo from "../../Assets/logo.png";  
 
 function Navbar() {
   const { isAuthenticated, logout } = useContext(AuthContext);
@@ -10,7 +11,7 @@ function Navbar() {
     <nav className="nav-bar" aria-label="Main navigation">
       <ul className="nav-container">
         <li>
-          <img src="path-to-logo.png" alt="Logo" className="logo" />
+          <img src={logo} alt="Logo" className="logo" />
         </li>
         {isAuthenticated ? (
           <div className="nav-holder">
