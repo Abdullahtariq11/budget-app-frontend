@@ -1,70 +1,169 @@
-# Getting Started with Create React App
+# 💻 **BudgetApp Frontend**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The **BudgetApp Frontend** is the user interface for the **BudgetApp**, a comprehensive financial management application. Built with **React**, it provides users with an intuitive, user-friendly interface to manage their transactions, budgets, and cards effortlessly. This frontend integrates seamlessly with the **BudgetApp API**, delivering a smooth and secure user experience.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✨ **Features**
 
-### `npm start`
+- 🔐 **User Authentication**: Secure login and signup functionality integrated with the backend.  
+- 📊 **Dashboard**: View an overview of your budgets, transactions, and card balances.  
+- 💳 **Card Management**: Add, view, edit, and delete cards.  
+- 🗂️ **Budget Categories**: Create and manage budget categories to track expenses.  
+- 📜 **Transaction Management**: Add, view, update, and delete transactions.  
+- 🌐 **Responsive Design**: Fully responsive for desktop and mobile devices.  
+- 🔍 **Pagination, Sorting, and Filtering**: Easily browse and manage large datasets.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ **Technologies Used**
 
-### `npm test`
+- **Frontend Framework**: React  
+- **State Management**: React Context API (or Redux, if applicable)  
+- **UI Framework**: Material-UI / Bootstrap (or any UI library in use)  
+- **Routing**: React Router  
+- **API Communication**: Axios  
+- **Authentication**: JWT integration with the backend  
+- **Form Validation**: React Hook Form / Yup  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📂 **Project Structure**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```plaintext
+BudgetAppFrontend/
+│
+├── /src
+│   ├── /components           # Reusable UI components
+│   ├── /pages                # Individual page components (e.g., Dashboard, Login)
+│   ├── /context              # Context providers for global state
+│   ├── /services             # API service functions
+│   ├── /utils                # Helper utilities
+│   ├── /assets               # Images, icons, and static assets
+│   ├── App.js                # Main app component
+│   └── index.js              # Application entry point
+│
+├── /public                   # Public assets (e.g., index.html)
+│
+└── package.json              # Project dependencies
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🚀 **Getting Started**
 
-### `npm run eject`
+### Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Node.js** and **npm** or **yarn** installed.
+- Backend API (`BudgetApp API`) running locally or remotely.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### ⚙️ **Setup**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### 1. **Clone the Repository**
+```bash
+git clone https://github.com/Abdullahtariq11/BudgetAppFrontend.git
+cd BudgetAppFrontend
+```
 
-## Learn More
+#### 2. **Install Dependencies**
+```bash
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### 3. **Configure Environment Variables**
+Create a `.env` file in the root directory and configure the following:
+```plaintext
+REACT_APP_API_BASE_URL=http://localhost:5000
+REACT_APP_JWT_SECRET=YourJWTSecretKey
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### 4. **Start the Development Server**
+```bash
+npm start
+```
+The app will be available at: `http://localhost:3000`.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📂 **Pages and Components**
 
-### Analyzing the Bundle Size
+### Pages
+- **Login/Signup**: User authentication.
+- **Dashboard**: Overview of budgets, transactions, and cards.
+- **Transactions**: Add, view, update, and delete transactions.
+- **Cards**: Manage your cards.
+- **Budget Categories**: Create and manage categories for your budgets.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Key Components
+- **Navbar**: Persistent navigation across the app.
+- **CardItem**: Displays individual card details.
+- **BudgetCategoryItem**: Shows budget category information.
+- **TransactionTable**: Lists transactions with sorting and filtering.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🔍 **API Integration**
 
-### Advanced Configuration
+The frontend communicates with the backend using **Axios**. All requests are sent to the base URL configured in the `.env` file. Example API calls include:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- `POST /api/Users/Login` for user authentication.
+- `GET /api/Users/{userId}/transactions` for fetching user transactions.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🧪 **Testing**
 
-### `npm run build` fails to minify
+### Running Tests
+If you have implemented frontend tests using Jest, React Testing Library, or Cypress, you can run tests as follows:
+```bash
+npm test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 📝 **Future Enhancements**
+
+- 🌙 **Dark Mode**: Implement a toggle for light and dark themes.  
+- 🌐 **Multi-language Support**: Add localization for multiple languages.  
+- 📱 **Progressive Web App (PWA)**: Enhance the app for offline use.  
+
+---
+
+## 🤝 **Contributing**
+
+1. Fork the repository.  
+2. Create a feature branch:  
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Commit your changes:  
+   ```bash
+   git commit -m 'Add YourFeature'
+   ```
+4. Push to the branch:  
+   ```bash
+   git push origin feature/YourFeature
+   ```
+5. Open a pull request.
+
+---
+
+## 📜 **License**
+
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+
+---
+
+## 📧 **Contact**
+
+For inquiries or support, contact:  
+**Abdullah Tariq**  
+📧 Email: [abdullahtariq096@gmail.com](mailto:abdullahtariq096@gmail.com)
+
+---
+
+### 🌟 **"Take control of your finances with ease!"**  
+
+Feel free to suggest any improvements or report issues in the repository. Happy coding! 🎉
